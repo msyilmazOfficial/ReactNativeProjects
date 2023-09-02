@@ -5,25 +5,21 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
+  TextInput,
+  Button,
+  Alert,
   Text,
-  useColorScheme,
-  View,
-  Image
+  ScrollView,
+  RefreshControl,
 } from 'react-native';
 
 import {
   Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
@@ -32,49 +28,29 @@ type SectionProps = PropsWithChildren<{
 
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+const [refreshing, setrefresh]=useState(false)
+const onrefresh=() =>{
+  setrefresh(true)
+  setTimeout(() => {
+    setrefresh(false)
+  }, 2000);
+}
   return (
     <SafeAreaView style={styles.background}>
-      <Text>hello world</Text>
-      <Image
-  source={{
-    uri: 'https://reactjs.org/logo-og.png',
-    method: 'POST',
-    headers: {
-      Pragma: 'no-cache',
-    },
-    body: 'Your Body goes here',
-  }}
-  style={{width: 400, height: 400}}
-/>
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onrefresh}></RefreshControl>}>
+        <Text style={{fontSize:30}}>React Native provides a number of built-in Core Components ready for you to use in your app. You can find them all in the left sidebar (or menu above, if you are on a narrow screen). If you're not sure where to get started, take a look at the following categories:React Native provides a number of built-in Core Components ready for you to use in your app. You can find them all in the left sidebar (or menu above, if you are on a narrow screen). If you're not sure where to get started, take a look at the following categories:React Native provides a number of built-in Core Components ready for you to use in your app. You can find them all in the left sidebar (or menu above, if you are on a narrow screen). If you're not sure where to get started, take a look at the following categories:React Native provides a number of built-in Core Components ready for you to use in your app. You can find them all in the left sidebar (or menu above, if you are on a narrow screen). If you're not sure where to get started, take a look at the following categories:</Text>
+        
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   background:{
-    backgroundColor:'yellow',
-    flex:1
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+    backgroundColor:'lightgray',
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
   },
 });
 
